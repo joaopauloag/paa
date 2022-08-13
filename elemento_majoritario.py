@@ -1,30 +1,23 @@
-def elementoMajoritario(A, inicio, fim):
+def elementoMajoritario(elementos):
 	
-	if inicio == fim:
-		return A[inicio]
+	n = len(elementos)
+	if n == 1:
+		return elementos[0]
 
-	meio = (inicio + fim) // 2
-	esquerda = elementoMajoritario(A, inicio, meio)
-	direita = elementoMajoritario(A, meio+1, fim)
+	maj = []
 
-	if esquerda == direita:
-		return esquerda
+	for i in range(n-1):
+		if elementos[i] == elementos[i+1]:
+			maj.append(elementos[i])
 
-	cnt_esquerda = cnt_direita = 0
-	n = len(A)
+	return elementoMajoritario(maj) if len(maj) > 0 else None
 
-	for a in A:
-		if a == esquerda:
-			cnt_esquerda += 1
-		if a == direita:
-			cnt_direita += 1
 
-	if cnt_esquerda > meio + 1:
-		return esquerda
-	elif cnt_direita > meio + 1:
-		return direita
-	else:
-		return None
-
-A = [7, 4, 'joao', 4, 4, 4, 7, 4, 'oi', 7.6, 4, 'z', 4, 5.7, 4, 4, 4, 10, 4, 9]
-print('Elemento Majoritário:', elementoMajoritario(A, 0, len(A)-1))
+A = [7, 4, 'joao', 4, 4, 4, 'oi', 7.6, 4, 'z', 4, 5.7, 4, 4, 4, 10, 4, 9]
+print('Elemento Majoritário:', elementoMajoritario(A))
+B = [4, 5, 6, 10, 20, 7, 30]
+print('Elemento Majoritário:', elementoMajoritario(B))
+C = [4, 5, 4, 6, 4, 7]
+print('Elemento Majoritário:', elementoMajoritario(C))
+D = [2, 'a', 'a', 5, 'a']
+print('Elemento Majoritário:', elementoMajoritario(D))
